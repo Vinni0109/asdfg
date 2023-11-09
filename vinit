@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>4dfcc954 vinitkumar</title>
+</head>
+<body>
+
+<h1>Rock Paper Scissors</h1>
+
+<form method="post">
+<input type="radio" name="choice" value="rock"><img src="rock.png" alt="Rock">
+<input type="radio" name="choice" value="paper"><img src="paper.png" alt="Paper">
+<input type="radio" name="choice" value="scissors"><img src="scissors.png" alt="Scissors">
+<br>
+<input type="submit" value="Play">
+</form>
+</body>
+</html>
+<?php
+
+// Check if the user is logged in
+if (!isset($_REQUEST['name'])) {
+    echo "<p>Please log in before playing.</p>";
+    echo "<a href='login.php'>Please Log In</a>";
+    exit;
+}
+
+// Array of choices
+$choices = array('rock', 'paper', 'scissors');
+
+// Get the user's choice
+$userChoice = $_POST['choice'];
+
+// Get the computer's choice
+$computerChoice = $choices[rand(0, 2)];
+
+// Determine the winner
+$winner = determineWinner($userChoice, $computerChoice);
+
+// Display the results
+echo "<p>You chose $userChoice. The computer chose $computerChoice.<br>";
+echo "The winner is $winner.</p>";
+
+// Function to determine the winner
+function determineWinner($userChoice, $computerChoice) {
+    if ($userChoice == $computerChoice) {
+        return "Tie";
+    } else if ($userChoice == "rock" && $computerChoice == "scissors") {
+        return "You";
+    } else if ($userChoice == "paper" && $computerChoice == "rock") {
+        return "You";
+    } else if ($userChoice == "scissors" && $computerChoice == "paper") {
+        return "You";
+    } else {
+        return "Computer";
+    }
+}
+?>
